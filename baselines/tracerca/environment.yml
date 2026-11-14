@@ -1,0 +1,22 @@
+# Dedicated env for the vendored TraceRCA downstream-RCA evaluator.
+# Create:  conda env create -f baselines/tracerca/environment.yml
+# (or)     conda create -n tracerca -y python=3.9 pandas numpy scikit-learn scipy
+#          && conda run -n tracerca pip install mlxtend diskcache loguru click
+#
+# Versions are fresh wheels, not the original 2021 pins (unknown). fpgrowth is
+# deterministic; see PROVENANCE.md "Fresh dependency versions".
+name: tracerca
+channels:
+  - conda-forge
+dependencies:
+  - python=3.9
+  - pandas>=1.3
+  - numpy>=1.21
+  - scikit-learn
+  - scipy
+  - pip
+  - pip:
+      - mlxtend
+      - diskcache
+      - loguru
+      - click

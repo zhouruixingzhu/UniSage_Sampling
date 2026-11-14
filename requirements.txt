@@ -1,0 +1,9 @@
+# pip fallback; primary lock is environment.yml (conda env `unisage`, Python 3.9).
+# Direct deps pinned — transitive deps (joblib, drain3's cachetools/jsonpickle, etc.) resolve automatically.
+pandas==2.3.1
+numpy==2.0.2
+scikit-learn==1.6.1
+scipy==1.13.1
+drain3==0.9.11
+aiomultiprocess==0.9.1
+pyarrow==21.0.0

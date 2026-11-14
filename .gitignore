@@ -1,0 +1,84 @@
+# Datasets and intermediate outputs — keep these OUT of git (use a cloud link).
+# NOTE: data/ is currently still tracked in history. Adding it here does not
+# untrack it. To stop tracking (run when your in-progress edits are settled):
+#   git rm -r --cached data
+#   git commit -m "chore: stop tracking data/ (moved to cloud)"
+data/
+/data
+
+# Generated experiment outputs stay local and are not part of the source release.
+/results/
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# Drain3 persistence / local state
+drain3_state.bin
+*.bin
+
+# OS / editor
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# Large build artifact (paper PDF lives in the paper repo / Overleaf)
+paper.pdf
+
+# Experiment phase-1 caches (large, regenerable) and transient run logs
+results/_benefit_cache_*.pkl
+results/*stderr*.log
+
+# Generated label manifests can be regenerated from data + protocol; keep only
+# compact indexes/provenance in git.
+results/label_protocol_v02/manifests/*.csv.gz
+results/label_protocol_v02/log_manifests/*.csv.gz
+results/v02_sampling_runs/*/samples/*.csv.gz
+results/v02_sampling_runs/*/logs/*.log
+results/v02_sampling_runs/_logs/*.log
+
+# Vendored Nezha baseline (baselines/nezha/): keep the small source + precomputed
+# drain3 template state + metric thresholds in git; keep the bundled datasets and
+# runtime logs OUT (re-fetchable from https://github.com/IntelligentDDS/Nezha).
+baselines/nezha/construct_data/
+baselines/nezha/rca_data/
+baselines/nezha/log/
+# Also ignore local symlinks to those external trees.
+/baselines/nezha/construct_data
+/baselines/nezha/rca_data
+/baselines/nezha/log
+baselines/nezha/FSE2023_Nezha.pdf
+# ...but the drain3 *.bin template snapshots ARE required to run Nezha, so the
+# global `*.bin` rule above must not eat them:
+!baselines/nezha/log_template/
+!baselines/nezha/log_template/*.bin
+
+# Historical Eadro experiment data and outputs remain local after baseline removal.
+baselines/eadro/upstream/chunks/
+baselines/eadro/upstream/result/
+baselines/eadro/upstream/codes/parsed_data/
+baselines/eadro/data/
+results/eadro/_smoke/
+results/eadro/*/_scratch/
+
+# Vendored TraceRCA baseline (baselines/tracerca/): keep the small Python source
+# + provenance in git; the upstream study dataset is external (OneDrive /
+# Tsinghua Cloud, see baselines/tracerca/README.md) and never committed. Keep
+# diskcache stores and per-sweep scratch out.
+baselines/tracerca/**/*.diskcache/
+results/tracerca/_smoke/
+results/tracerca/*/_scratch/
+
+# Local experiment outputs and machine-specific settings.
+.claude/settings.local.json
+logs/
+results/**/_benefit_cache_*.pkl
+results/**/_scratch/
+results/**/_debug*/
+results/**/_smoke*/
+results/**/smoke*/
+results/**/sensitivity_smoke*/
